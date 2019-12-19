@@ -80,7 +80,10 @@ export default {
         if (distance < this.step || distance === 0) {
           scrollDom.scrollTop = targetDistance
           clearInterval(this.timer)
-          elm.querySelector('input').focus()
+          let name = elm.querySelector('[name]')
+          if (name) {
+            name.focus()
+          }
         } else {
           scrollDom.scrollTop -= this.step
         }

@@ -78,13 +78,15 @@ export default {
      * @return {Object|Boolean} 失败返回Object，成功返回true
      */
     validate () {
-      let { is, isText } = this.mapData
+      let { is, isText, none } = this.mapData
+      if (none) return
       let obj = null
       let b = false
-      if (none) return
-      if (isText) {
+      if (isText === false && isN(this.value)) {
+        return
+      } else if (isText) {
         b = this.isValue()
-        if (b) obj = { warning: isText }
+        if (b) obj = {warning: isText}
       }
       if (!b && Array.isArray(is)) obj = this.isArray()
       if (obj) {

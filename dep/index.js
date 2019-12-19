@@ -12,10 +12,14 @@ export default class Dep {
     let result = null
     let b = !!includes.length
     this.subs.forEach(isBox => {
-      if (b && includes.indexOf(isBox.mapData.key) === -1) {
+      if (b && !includes.includes(isBox.mapData.key)) {
+        isBox.setBorder(false)
         return
       }
       let obj = isBox.validate()
+      if (!obj) {
+        isBox.setBorder(false)
+      }
       if (!result && obj) result = obj
     })
     return result
